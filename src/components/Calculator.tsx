@@ -1,3 +1,4 @@
+import { InputDataSchema, InputDataType } from "../../lib/InputDataSchema";
 export default function Calculator() {
   return (
     <div className="w-[75vw] md:w-[50vw] grid justify-center gap-4 p-[3rem] rounded-md shadow-md shadow-gray-950 bg-gray-950/[0.7]">
