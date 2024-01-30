@@ -1,5 +1,3 @@
-import { render, screen } from "@testing-library/react";
-import Calculator from "../components/Calculator";
 import { expect } from "vitest";
 import { feeCalculator } from "../../lib/feeCalculator";
 
@@ -199,19 +197,5 @@ describe("Testing: delivery fee can not be more than 15€", () => {
       dateTime: new Date("January 26, 2024 19:00:00"),
     };
     expect(feeCalculator(testVale)).toBe(15);
-  });
-});
-
-// Testing components
-
-describe("Testing components", () => {
-  it("Is Calculator component present in DOM", () => {
-    render(<Calculator />);
-    const CalculatorComponent = screen.getByTestId("calculator");
-    expect(CalculatorComponent).toBeDefined();
-  });
-  it("Is content of delivery fee span empty at begining", () => {
-    render(<Calculator />);
-    expect(screen.getByTestId("deliveryFee").innerHTML).toBe("");
   });
 });
