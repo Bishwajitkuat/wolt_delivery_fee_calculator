@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
+# Delivery Fee Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Frontend (React + TS)
 
-Currently, two official plugins are available:
+This app takes user inputs and return delivery price. I have used Vite to innitiate the React project with TS. Tailwindcss is used to style the app. I have used Zod to validate user inputs and it is helpfull to give elaborate and customized error message for worng input types in combination with react-hookform and hookform/resolvers. Finally, Vitest is used for testing the Calculator component and feeCalculator function.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies
 
-## Expanding the ESLint configuration
+- React
+- TS
+- Tailwindcss
+- react-hook-form
+- Zod
+- hookform/resolvers
+- vitest
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Setting up the dev environment
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```shell
+# cd into the root directory of the project
+npm i
+npm run dev
+# please find the dev server URL
+# For running the tests
+npm run test
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
