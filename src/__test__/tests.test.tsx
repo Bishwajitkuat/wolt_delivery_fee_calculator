@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Calculator from "../components/Calculator";
-import { expect, test } from "vitest";
-import { feeCalculator } from "../../lib/FeeCalculate";
+import { expect } from "vitest";
+import { feeCalculator } from "../../lib/feeCalculator";
 
 // Testing feeCalculator
 describe("Testing feeCalculator with different distance values", () => {
