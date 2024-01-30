@@ -210,7 +210,7 @@ describe("Testing components", () => {
     const CalculatorComponent = screen.getByTestId("calculator");
     expect(CalculatorComponent).toBeDefined();
   });
-  it("Does content of delivery fee span empty at begining", () => {
+  it("Is content of delivery fee span empty at begining", () => {
     render(<Calculator />);
     expect(screen.getByTestId("deliveryFee").innerHTML).toBe("");
   });
