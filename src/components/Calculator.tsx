@@ -1,8 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputDataSchema, InputDataType } from "../../lib/InputDataSchema";
+import { feeCalculator } from "../../lib/FeeCalculate";
+import { useState } from "react";
 
 export default function Calculator() {
+  const [deliveryFee, setDeliveryFee] = useState<number>();
   const {
     register,
     handleSubmit,
@@ -13,7 +16,8 @@ export default function Calculator() {
   });
 
   const userSubmitHandler: SubmitHandler<InputDataType> = (data) => {
-    console.log(data);
+    const deliveryFee: number = feeCalculator(data);
+    setDeliveryFee(deliveryFee);
     reset();
   };
 
@@ -80,14 +84,16 @@ export default function Calculator() {
           )}
         </div>
         <button
-          className="border mt-[1rem] py-[0.5rem] rounded-md"
+          className="text-gray-800 border mt-[1rem] py-[0.5rem] rounded-md bg-slate-300 hover:bg-gradient-to-br from-blue-400 to-green-400"
           type="submit"
           disabled={isSubmitting}
         >
           Calculate delivery price
         </button>
       </form>
-      <p>Delivery price is {}€</p>
+      <p className="text-[1.2rem] text-slate-300 text-center">
+        Delivery price is {deliveryFee?.toFixed(2)}€
+      </p>
     </div>
   );
 }
