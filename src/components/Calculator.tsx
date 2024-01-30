@@ -17,12 +17,16 @@ export default function Calculator() {
 
   const userSubmitHandler: SubmitHandler<InputDataType> = (data) => {
     const deliveryFee: number = feeCalculator(data);
+    console.log(deliveryFee);
     setDeliveryFee(deliveryFee);
     reset();
   };
 
   return (
-    <div className="w-[75vw] md:w-[50vw] grid justify-center gap-4 p-[3rem] rounded-md shadow-md shadow-gray-950 bg-gray-950/[0.7]">
+    <div
+      data-testid="calculator"
+      className="w-[75vw] md:w-[50vw] grid justify-center gap-4 p-[3rem] rounded-md shadow-md shadow-gray-950 bg-gray-950/[0.7]"
+    >
       <h1 className="text-[2rem] text-center mb-[2rem] text-slate-200 font-semibold">
         Delivery Fee Calculator
       </h1>
@@ -92,7 +96,8 @@ export default function Calculator() {
         </button>
       </form>
       <p className="text-[1.2rem] text-slate-300 text-center">
-        Delivery price is {deliveryFee?.toFixed(2)}€
+        Delivery price:{"  "}
+        <span data-testid="deliveryFee">{deliveryFee?.toFixed(2)}</span>€
       </p>
     </div>
   );
