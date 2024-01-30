@@ -2,10 +2,10 @@ import { z } from "zod";
 
 // declaring the schema for the user inputs
 export const InputDataSchema = z.object({
-  cartValue: z.coerce.number(),
-  distance: z.coerce.number(),
-  itemNumber: z.coerce.number(),
-  dateTime: z.date(),
+  cartValue: z.coerce.number().min(1),
+  distance: z.coerce.number().min(1),
+  itemNumber: z.coerce.number().min(1),
+  dateTime: z.coerce.date(),
 });
 
 // getting type from z schema
