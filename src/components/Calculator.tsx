@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputDataSchema, InputDataType } from "../../lib/InputDataSchema";
-import { feeCalculator } from "../../lib/FeeCalculate";
+import { feeCalculator } from "../../lib/feeCalculator";
 import { useState } from "react";
 
 export default function Calculator() {
@@ -17,7 +17,6 @@ export default function Calculator() {
 
   const userSubmitHandler: SubmitHandler<InputDataType> = (data) => {
     const deliveryFee: number = feeCalculator(data);
-    console.log(deliveryFee);
     setDeliveryFee(deliveryFee);
     reset();
   };
@@ -97,12 +96,8 @@ export default function Calculator() {
       </form>
       <p className="text-[1.2rem] text-slate-300 text-center">
         Delivery price:{"  "}
-        {deliveryFee ? (
-          <span data-testid="deliveryFee">{deliveryFee?.toFixed(2)}</span>
-        ) : (
-          "0.00"
-        )}
-        €
+        <span data-testid="deliveryFee">{deliveryFee?.toFixed(2)}</span>
+        {deliveryFee === undefined ? "0.00" : ""}€
       </p>
     </div>
   );
