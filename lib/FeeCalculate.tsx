@@ -11,17 +11,17 @@ export const feeCalculator = (userInput: InputDataType): number => {
 
   // fees added for distance
   if (distance <= 1000) {
-    deliveryFee += 1;
+    deliveryFee += 2;
   } else {
     const reminder = (distance - 1000) % 500;
     const timesOf500m = Math.floor((distance - 1000) / 500);
     // fee for first 1000m
-    deliveryFee += 1;
+    deliveryFee += 2;
     // fee for the rest distance
-    if (reminder !== 0) {
-      deliveryFee += (timesOf500m + 1) * 1;
-    } else {
+    if (reminder === 0) {
       deliveryFee += timesOf500m * 1;
+    } else {
+      deliveryFee += (timesOf500m + 1) * 1;
     }
   }
 
