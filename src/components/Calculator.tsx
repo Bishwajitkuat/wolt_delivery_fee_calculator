@@ -25,7 +25,7 @@ export default function Calculator() {
   return (
     <div
       data-testid="calculator"
-      className="w-[75vw] md:w-[50vw] grid justify-center gap-4 p-[3rem] rounded-md shadow-md shadow-gray-950 bg-gray-950/[0.7]"
+      className="w-[75vw] md:w-[50vw] min-w-[350px] grid justify-center gap-4 p-[3rem] rounded-md shadow-md shadow-gray-950 bg-gray-950/[0.7]"
     >
       <h1 className="text-[2rem] text-center mb-[2rem] text-slate-200 font-semibold">
         Delivery Fee Calculator
@@ -88,7 +88,7 @@ export default function Calculator() {
           )}
         </div>
         <button
-          className="text-gray-800 border mt-[1rem] py-[0.5rem] rounded-md bg-slate-300 hover:bg-gradient-to-br from-blue-400 to-green-400"
+          className="text-gray-900 text-[1.2rem] font-semibold mt-[1rem] py-[0.5rem] rounded-md shadow-xl bg-[#27b4d4] hover:bg-gradient-to-br from-green-400 via-yellow-200 to-red-400"
           type="submit"
           disabled={isSubmitting}
         >
@@ -97,7 +97,12 @@ export default function Calculator() {
       </form>
       <p className="text-[1.2rem] text-slate-300 text-center">
         Delivery price:{"  "}
-        <span data-testid="deliveryFee">{deliveryFee?.toFixed(2)}</span>€
+        {deliveryFee ? (
+          <span data-testid="deliveryFee">{deliveryFee?.toFixed(2)}</span>
+        ) : (
+          "0.00"
+        )}
+        €
       </p>
     </div>
   );
