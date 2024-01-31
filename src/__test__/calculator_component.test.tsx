@@ -18,34 +18,34 @@ describe("Testing Calculator Component", () => {
   });
   it("Testing distance input field register change", () => {
     render(<Calculator />);
-    const cartValueInputElement: HTMLInputElement =
+    const distanceInputElement: HTMLInputElement =
       screen.getByPlaceholderText(/example: 1200/i);
-    fireEvent.change(cartValueInputElement, { target: { value: 1200 } });
-    expect(cartValueInputElement.value).toEqual("1200");
+    fireEvent.change(distanceInputElement, { target: { value: 1200 } });
+    expect(distanceInputElement.value).toEqual("1200");
   });
   it("Testing itemNumber input field register change", () => {
     render(<Calculator />);
-    const cartValueInputElement: HTMLInputElement =
+    const itemNumberInputElement: HTMLInputElement =
       screen.getByPlaceholderText(/example: 4/i);
-    fireEvent.change(cartValueInputElement, { target: { value: 8 } });
-    expect(cartValueInputElement.value).toEqual("8");
+    fireEvent.change(itemNumberInputElement, { target: { value: 8 } });
+    expect(itemNumberInputElement.value).toEqual("8");
   });
   it("Testing date input field register change", () => {
     render(<Calculator />);
-    const cartValueInputElement: HTMLInputElement =
+    const dateInputElement: HTMLInputElement =
       screen.getByPlaceholderText(/date/i);
-    fireEvent.change(cartValueInputElement, {
+    fireEvent.change(dateInputElement, {
       target: { value: "2023-06-14" },
     });
-    expect(cartValueInputElement.value).toEqual("2023-06-14");
+    expect(dateInputElement.value).toEqual("2023-06-14");
   });
   it("Testing time input field register change", () => {
     render(<Calculator />);
-    const cartValueInputElement: HTMLInputElement =
+    const timeInputElement: HTMLInputElement =
       screen.getByPlaceholderText(/time/i);
-    fireEvent.change(cartValueInputElement, {
+    fireEvent.change(timeInputElement, {
       target: { value: "14:20" },
     });
-    expect(cartValueInputElement.value).toEqual("14:20");
+    expect(timeInputElement.value).toEqual("14:20");
   });
 });
