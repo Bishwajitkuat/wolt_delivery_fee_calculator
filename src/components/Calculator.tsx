@@ -1,6 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputDataSchema, InputDataType } from "../../lib/InputDataSchema";
+import {
+  FeeCalculatorInputType,
+  InputDataSchema,
+  InputDataType,
+} from "../../lib/InputDataSchema";
 import { feeCalculator } from "../../lib/feeCalculator";
 import { useState } from "react";
 import Heading from "./Heading";
@@ -18,9 +22,32 @@ export default function Calculator() {
   });
 
   const userSubmitHandler: SubmitHandler<InputDataType> = (data) => {
-    const deliveryFee: number = feeCalculator(data);
-    setDeliveryFee(deliveryFee);
-    reset();
+    // validating the user inputs
+    const validatedData = InputDataSchema.safeParse(data);
+    // if validation is a success, I will send data to feeCalculator fuction
+    if (validatedData.success) {
+      // creating a data instance
+      const dateTime = new Date(
+        `${validatedData.data.date} ${validatedData.data.time}`
+      );
+      // creating an object which can be pass into feeCalculator function
+      const dataForFeeCalculation: FeeCalculatorInputType = {
+        cartValue: validatedData.data.cartValue,
+        distance: validatedData.data.distance,
+        itemNumber: validatedData.data.itemNumber,
+        dateTime: dateTime,
+      };
+      // passing data into feeCalculator function and setting the return value for deliveryFee state
+      const deliveryFee: number = feeCalculator(dataForFeeCalculation);
+      setDeliveryFee(deliveryFee);
+      // finally resetting the form new inputes
+      reset();
+    } else {
+      // it will come here if something went wrong during data validation.
+      alert(
+        "Sorry! something went wrong during data validation, please try later!"
+      );
+    }
   };
 
   return (
@@ -79,16 +106,24 @@ export default function Calculator() {
           <label className="text-slate-200 text-[1.2rem]" htmlFor="dateTime">
             Time
           </label>
-          <input
-            className="p-[0.5rem] bg-slate-300 text-slate-800 border border-1 rounded-md border-blue-500 focus:border-lime-500 focus:outline-none"
-            type="datetime-local"
-            id="dateTime"
-            placeholder="dateTime"
-            {...register("dateTime")}
-          />
-          {errors.dateTime && (
-            <p className="text-red-500">{errors.dateTime.message}</p>
-          )}
+          <div className="flex gap-2 flex-nowrap">
+            <input
+              className="flex-grow p-[0.5rem] bg-slate-300 text-slate-800 border border-1 rounded-md border-blue-500 focus:border-lime-500 focus:outline-none"
+              type="date"
+              id="date"
+              placeholder="date"
+              {...register("date")}
+            />{" "}
+            <input
+              className="p-[0.5rem] bg-slate-300 text-slate-800 border border-1 rounded-md border-blue-500 focus:border-lime-500 focus:outline-none"
+              type="time"
+              id="time"
+              placeholder="time"
+              {...register("time")}
+            />
+          </div>
+          {errors.date && <p className="text-red-500">{errors.date.message}</p>}
+          {errors.time && <p className="text-red-500">{errors.time.message}</p>}
         </div>
         <button
           className="text-gray-900 text-[1.2rem] font-semibold mt-[1rem] py-[0.5rem] rounded-md shadow-xl bg-[#27b4d4] hover:bg-gradient-to-br from-green-400 via-yellow-200 to-red-400"
