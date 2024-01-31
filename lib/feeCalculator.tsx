@@ -1,5 +1,6 @@
-import { InputDataType } from "./InputDataSchema";
-export const feeCalculator = (userInput: InputDataType): number => {
+import { FeeCalculatorInputType } from "./InputDataSchema";
+
+export const feeCalculator = (userInput: FeeCalculatorInputType): number => {
   const { cartValue, distance, itemNumber, dateTime } = userInput;
   let deliveryFee: number = 0;
 
