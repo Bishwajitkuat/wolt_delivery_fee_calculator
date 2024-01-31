@@ -3,7 +3,7 @@ import Calculator from "../components/Calculator";
 
 // Testing components
 
-describe("Testing Calculator", () => {
+describe("Testing Calculator Component", () => {
   it("Is Calculator component present in DOM", () => {
     render(<Calculator />);
     const CalculatorComponent = screen.getByTestId("calculator");
@@ -30,13 +30,22 @@ describe("Testing Calculator", () => {
     fireEvent.change(cartValueInputElement, { target: { value: 8 } });
     expect(cartValueInputElement.value).toEqual("8");
   });
-  it("Testing dateTime input field register change", () => {
+  it("Testing date input field register change", () => {
     render(<Calculator />);
     const cartValueInputElement: HTMLInputElement =
-      screen.getByPlaceholderText(/dateTime/i);
+      screen.getByPlaceholderText(/date/i);
     fireEvent.change(cartValueInputElement, {
-      target: { value: "2023-06-14T00:00" },
+      target: { value: "2023-06-14" },
     });
-    expect(cartValueInputElement.value).toEqual("2023-06-14T00:00");
+    expect(cartValueInputElement.value).toEqual("2023-06-14");
+  });
+  it("Testing time input field register change", () => {
+    render(<Calculator />);
+    const cartValueInputElement: HTMLInputElement =
+      screen.getByPlaceholderText(/time/i);
+    fireEvent.change(cartValueInputElement, {
+      target: { value: "14:20" },
+    });
+    expect(cartValueInputElement.value).toEqual("14:20");
   });
 });
