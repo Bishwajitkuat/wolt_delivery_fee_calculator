@@ -103,7 +103,7 @@ export default function Calculator() {
           )}
         </div>
         <div className="grid gap-2">
-          <label className="text-slate-200 text-[1.2rem]" htmlFor="dateTime">
+          <label className="text-slate-200 text-[1.2rem]" htmlFor="date">
             Time
           </label>
           <div className="flex gap-2 flex-nowrap">
