@@ -3,9 +3,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { InputDataSchema, InputDataType } from "../../lib/InputDataSchema";
 import { feeCalculator } from "../../lib/feeCalculator";
 import { useState } from "react";
+import Heading from "./Heading";
+import DisplayDeliveryFee from "./DisplayDeliveryFee";
 
 export default function Calculator() {
-  const [deliveryFee, setDeliveryFee] = useState<number>();
+  const [deliveryFee, setDeliveryFee] = useState<number>(0);
   const {
     register,
     handleSubmit,
@@ -26,9 +28,7 @@ export default function Calculator() {
       data-testid="calculator"
       className="w-[75vw] md:w-[50vw] min-w-[350px] grid justify-center gap-4 p-[3rem] rounded-md shadow-md shadow-gray-950 bg-gray-950/[0.7]"
     >
-      <h1 className="text-[2rem] text-center mb-[2rem] text-slate-200 font-semibold">
-        Delivery Fee Calculator
-      </h1>
+      <Heading title="Delivery Fee Calculator" />
       <form className="grid gap-6" onSubmit={handleSubmit(userSubmitHandler)}>
         <div className="grid gap-2">
           <label className="text-slate-200 text-[1.2rem]" htmlFor="cartValue">
@@ -38,6 +38,7 @@ export default function Calculator() {
             className="p-[0.5rem] bg-slate-300 text-slate-950 border border-1 rounded-md border-blue-500 focus:border-lime-500 focus:outline-none"
             type="text"
             id="cartValue"
+            placeholder="example: 15"
             {...register("cartValue")}
           />
           {errors.cartValue && (
@@ -52,6 +53,7 @@ export default function Calculator() {
             className="p-[0.5rem] bg-slate-300 text-slate-800 border border-1 rounded-md border-blue-500 focus:border-lime-500 focus:outline-none"
             type="text"
             id="distance"
+            placeholder="example: 1200"
             {...register("distance")}
           />
           {errors.distance && (
@@ -66,6 +68,7 @@ export default function Calculator() {
             className="p-[0.5rem] bg-slate-300 text-slate-800 border border-1 rounded-md border-blue-500 focus:border-lime-500 focus:outline-none"
             type="text"
             id="itemNumber"
+            placeholder="example: 4"
             {...register("itemNumber")}
           />
           {errors.itemNumber && (
@@ -80,6 +83,7 @@ export default function Calculator() {
             className="p-[0.5rem] bg-slate-300 text-slate-800 border border-1 rounded-md border-blue-500 focus:border-lime-500 focus:outline-none"
             type="datetime-local"
             id="dateTime"
+            placeholder="dateTime"
             {...register("dateTime")}
           />
           {errors.dateTime && (
@@ -94,11 +98,7 @@ export default function Calculator() {
           Calculate delivery price
         </button>
       </form>
-      <p className="text-[1.2rem] text-slate-300 text-center">
-        Delivery price:{"  "}
-        <span data-testid="deliveryFee">{deliveryFee?.toFixed(2)}</span>
-        {deliveryFee === undefined ? "0.00" : ""}€
-      </p>
+      <DisplayDeliveryFee deliveryFee={deliveryFee} />
     </div>
   );
 }
